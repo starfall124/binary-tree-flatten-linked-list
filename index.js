@@ -4,11 +4,11 @@ const Node = function (val) {
   this.right = null;
 };
 
-const deepFirstSearch = (root) => {
+const flattenBinaryTree = (root) => {
   if (!root) return null;
 
-  var leftNode = deepFirstSearch(root.left);
-  var rightNode = deepFirstSearch(root.right);
+  var leftNode = flattenBinaryTree(root.left);
+  var rightNode = flattenBinaryTree(root.right);
 
   if (root.left) {
     leftNode.right = root.right;
@@ -18,10 +18,6 @@ const deepFirstSearch = (root) => {
   root.left = null;
 
   return rightNode || leftNode || root;
-};
-
-const flattenBinaryTree = (root) => {
-  deepFirstSearch(root);
 };
 
 node1 = new Node(1);
@@ -39,4 +35,5 @@ node5.right = node6;
 console.log("-----------------Input---------------------");
 console.log(node1);
 console.log("-----------------Output---------------------");
+flattenBinaryTree(node1);
 console.log(node1);
